@@ -1,6 +1,7 @@
 package com.unifacisa.hospitalTurma2.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +10,6 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "prontuarios")
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
@@ -23,7 +23,7 @@ public class Prontuario {
 
     @OneToOne
     @JoinColumn(name = "paciente_id", unique = true)
-    @JsonIgnore
+    @JsonIgnoreProperties({"consultas", "prontuario"})
     private Paciente paciente;
 }
 

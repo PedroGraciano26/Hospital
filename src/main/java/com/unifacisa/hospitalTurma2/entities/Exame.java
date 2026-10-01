@@ -1,5 +1,6 @@
 package com.unifacisa.hospitalTurma2.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,7 +13,6 @@ import java.util.List;
 @Entity
 @Table(name = "exame")
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 public class Exame {
@@ -25,6 +25,6 @@ public class Exame {
     private String tipo;
 
     @ManyToMany(mappedBy = "exames")
+    @JsonIgnore
     private List<Consulta> consultas = new ArrayList<>();
-
 }

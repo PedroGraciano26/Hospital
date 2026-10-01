@@ -1,5 +1,6 @@
 package com.unifacisa.hospitalTurma2.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,7 +12,6 @@ import java.util.List;
 
 @Entity
 @Table(name="pacientes")
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
@@ -27,9 +27,11 @@ public class Paciente {
     private String endereco;
 
     @OneToMany(mappedBy = "paciente")
+    @JsonIgnoreProperties("paciente")
     private List<Consulta> consultas = new ArrayList<>();
 
     @OneToOne(mappedBy = "paciente")
+    @JsonIgnoreProperties("paciente")
     private Prontuario prontuario;
 
 

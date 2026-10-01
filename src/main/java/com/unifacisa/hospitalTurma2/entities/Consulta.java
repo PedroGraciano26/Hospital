@@ -1,6 +1,7 @@
 package com.unifacisa.hospitalTurma2.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,7 +15,6 @@ import java.util.List;
 @Entity
 @Table(name = "consultas")
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 public class Consulta {
@@ -27,16 +27,14 @@ public class Consulta {
 
     @ManyToOne
     @JoinColumn(name = "paciente_id")
-    @JsonIgnore
+    @JsonIgnoreProperties({"consultas", "prontuario"})
     private Paciente paciente;
 
-
     @ManyToMany
-    @JoinTable(
-            name= "consultas_exames",
+    @JoinTable(name = "consultas_exames",
             joinColumns = @JoinColumn(name = "consulta_id"),
-            inverseJoinColumns = @JoinColumn(name = "exame_id")
-    )
+            inverseJoinColumns = @JoinColumn(name = "exame_id"))
+    @JsonIgnoreProperties("consultas")
     private List<Exame> exames = new ArrayList<>();
 
 }
